@@ -1,0 +1,16 @@
+{
+	"name": "template",
+	"version": "0.1.1",
+	"description": "",
+	"author": "ZouriTech",
+	"license": "MIT",
+	"main": "main.jsx",
+	"scripts": {
+		"setup": "npm i && npm --prefix ./frontend i && npm --prefix ./backend i",
+		"dev": "concurrently \"npm --prefix ./frontend run start\" \"npm --prefix ./backend run back\""
+	},
+	"devDependencies": {
+		"concurrently": "^7.2.2"
+	}
+}
+
