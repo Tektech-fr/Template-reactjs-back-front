@@ -2,11 +2,13 @@
 	"name": "backend",
 	"main": "server.js",
 	"scripts": {
-		"back": "nodemon"
+		"back": "nodemon",
+		"migrate": "node db/migrate.js"
 	},
 	"dependencies": {
 		"dotenv": "^16.0.1",
 		"express": "^4.18.1",
+		"fs": "^0.0.1-security",
 		"mysql2": "^2.3.3",
 		"nodemon": "^2.0.18",
 		"template": "file:.."
