@@ -2,22 +2,23 @@ require("dotenv").config();
 
 const express = require("express");
 const connection = require("./db-config");
+const setup = require("./routes");
 
 const app = express();
 
 const port = parseInt(process.env.SERVER_PORT ?? "5000", 10);
 
-app.use((req, res) => {
-	res.json({ message: "Request read" });
+connection.connect((err) => {
+	if (err) console.error("error connecting: " + err.stack);
+	else
+		console.log(
+			`connected as id ${connection.threadId}. Keep it secret, we don't know where THEY are.`
+		);
 });
 
-connection.connect((err) => {
-	if (err) {
-		console.error("error connecting: " + err.stack);
-	} else {
-		console.log("connected as id " + connection.threadId);
-	}
-});
+app.use(express.json());
+
+setup(app);
 
 app.listen(port, (err) => {
 	if (err) {
