@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `users`;
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
   `password` VARCHAR(50) NOT NULL,
@@ -8,8 +8,8 @@ CREATE TABLE `user` (
   `phone` VARCHAR(20) NULL
 ) ENGINE=InnoDB;
 
-LOCK TABLES `user` WRITE;
-INSERT INTO `user` (`name`, `password`, `mail`, `phone`) VALUES
+LOCK TABLES `users` WRITE;
+INSERT INTO `users` (`name`, `password`, `mail`, `phone`) VALUES
 ("JohnA", "Iamthebest", "JohnA@company.com", "+33111111111"),
 ("JohnB", "Iamthebest", "JohnB@company.com", "+33222222222"),
 ("JohnC", "Iamthebest", "JohnC@company.com", "+33333333333"),

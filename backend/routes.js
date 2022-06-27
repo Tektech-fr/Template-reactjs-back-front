@@ -1,5 +1,5 @@
-const baseRouter = require("./base");
-const usersRouter = require("./users");
+const baseRouter = require("./controllers/base");
+const usersRouter = require("./controllers/users");
 
 const setup = (app) => {
 	app.use("/", baseRouter);
