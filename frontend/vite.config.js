@@ -8,10 +8,10 @@ export default defineConfig({
 	plugins: [react()],
 	resolve: {
 		alias: {
-			"@Comp": path.resolve(__dirname, "src/components"),
-			"@Page": path.resolve(__dirname, "src/pages"),
-			"@SassC": path.resolve(__dirname, "src/styles/components"),
-			"@SassP": path.resolve(__dirname, "src/styles/pages"),
+			"@comp": path.resolve(__dirname, "src/components"),
+			"@page": path.resolve(__dirname, "src/pages"),
+			"@sassC": path.resolve(__dirname, "src/styles/components"),
+			"@sassP": path.resolve(__dirname, "src/styles/pages"),
 		},
 	},
 });
