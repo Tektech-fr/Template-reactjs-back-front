@@ -8,7 +8,6 @@ const UserTable = () => {
 		axios
 			.get("http://localhost:5005/users/all")
 			.then((res) => {
-				console.log(res.data);
 				SetUsers(res.data);
 			})
 			.catch((error) => {
