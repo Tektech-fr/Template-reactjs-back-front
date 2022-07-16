@@ -34,4 +34,26 @@ usersRouter.post("/new", (req, res) => {
 		});
 });
 
+usersRouter.put("/:id", (req, res) => {
+	users
+		.updateUser(req.body, req.params.id)
+		.then(([result]) => {
+			res.status(201).send(`User ${req.body} successfully updated`);
+		})
+		.catch(() => {
+			res.status(500).send("Error updating user.");
+		});
+});
+
+usersRouter.delete("/:id", (req, res) => {
+	users
+		.deleteUser(req.params.id)
+		.then(([result]) => {
+			res.status(200).send(`User ${req.body} successfully deleted`);
+		})
+		.catch(() => {
+			res.status(500).send("Error deleting user.");
+		});
+});
+
 module.exports = usersRouter;

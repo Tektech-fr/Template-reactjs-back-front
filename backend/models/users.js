@@ -22,4 +22,15 @@ const createUser = (user) => {
 	);
 };
 
-module.exports = { findAll, findOne, createUser };
+const updateUser = (user, id) => {
+	return db.query(
+		"UPDATE users SET firstname = ? lastname = ? password = ? email = ? phone = ? WHERE id = ?",
+		[user.firstname, user.lastname, user.password, user.email, user.phone, id]
+	);
+};
+
+const deleteUser = (id) => {
+	return db.query("DELETE FROM users WHERE id = ?", [id]);
+};
+
+module.exports = { findAll, findOne, createUser, updateUser, deleteUser };
