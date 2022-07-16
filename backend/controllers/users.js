@@ -23,4 +23,15 @@ usersRouter.get("/:id", (req, res) => {
 		});
 });
 
+usersRouter.post("/new", (req, res) => {
+	users
+		.createUser(req.body)
+		.then(([result]) => {
+			res.status(200).send({ ...req.body, id: result.insertId });
+		})
+		.catch(() => {
+			res.status(500).send("Error creating new user.");
+		});
+});
+
 module.exports = usersRouter;

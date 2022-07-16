@@ -15,4 +15,11 @@ const findOne = (id) => {
 		.then(([res]) => res[0]);
 };
 
-module.exports = { findAll, findOne };
+const createUser = (user) => {
+	return db.query(
+		"INSERT INTO users (firstname, lastname, password, email, phone) VALUES (?, ?, ?, ?, ?)",
+		[user.firstname, user.lastname, user.password, user.email, user.phone]
+	);
+};
+
+module.exports = { findAll, findOne, createUser };
