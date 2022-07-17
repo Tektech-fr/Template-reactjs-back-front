@@ -1,37 +1,54 @@
-const UserTable = (props) => (
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Username</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{props.users.length > 0 ? (
-				props.users.map((user) => (
-					<tr key={user.id}>
-						<td>{user.name}</td>
-						<td>{user.username}</td>
-						<td>
-							<button
-								onClick={() => {
-									props.editRow(user);
-								}}
-							>
-								Edit
-							</button>
-							<button onClick={() => props.deleteUser(user.id)}>Delete</button>
-						</td>
-					</tr>
-				))
-			) : (
+import axios from "axios";
+
+const UserTable = ({ users, editRow }) => {
+	const deleteUser = (id) => {
+		axios
+			.delete(`http://localhost:5005/users/${id}`)
+			.then((res) => console.log(res.data))
+			.catch((err) => {
+				console.warn(err.res.data);
+			});
+	};
+
+	return (
+		<table>
+			<thead>
 				<tr>
-					<td>No users</td>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Actions</th>
 				</tr>
-			)}
-		</tbody>
-	</table>
-);
+			</thead>
+			<tbody>
+				{users.length > 0 ? (
+					users.map((user) => (
+						<tr key={user.id}>
+							<td>{user.firstname}</td>
+							<td>{user.lastname}</td>
+							<td>{user.email}</td>
+							<td>{user.phone}</td>
+							<td>
+								<button
+									onClick={() => {
+										editRow(user);
+									}}
+								>
+									Edit
+								</button>
+								<button onClick={() => deleteUser(user.id)}>Delete</button>
+							</td>
+						</tr>
+					))
+				) : (
+					<tr>
+						<td>No users</td>
+					</tr>
+				)}
+			</tbody>
+		</table>
+	);
+};
 
 export default UserTable;

@@ -3,7 +3,7 @@ const db = connection.promise();
 
 const findAll = () => {
 	return db
-		.query("SELECT firstname, lastname, email, phone FROM users ")
+		.query("SELECT id, firstname, lastname, email, phone FROM users ")
 		.then(([res]) => res);
 };
 
@@ -23,10 +23,7 @@ const createUser = (user) => {
 };
 
 const updateUser = (user, id) => {
-	return db.query(
-		"UPDATE users SET firstname = ? lastname = ? password = ? email = ? phone = ? WHERE id = ?",
-		[user.firstname, user.lastname, user.password, user.email, user.phone, id]
-	);
+	return db.query(`UPDATE users SET ? WHERE id = ?`, [user, id]);
 };
 
 const deleteUser = (id) => {

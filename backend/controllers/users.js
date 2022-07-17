@@ -7,7 +7,8 @@ usersRouter.get("/all", (req, res) => {
 		.then((result) => {
 			res.status(200).send(result);
 		})
-		.catch(() => {
+		.catch((err) => {
+			console.error(err);
 			res.status(500).send("Error requesting users.");
 		});
 });
@@ -18,7 +19,8 @@ usersRouter.get("/:id", (req, res) => {
 		.then((result) => {
 			res.status(200).send(result);
 		})
-		.catch(() => {
+		.catch((err) => {
+			console.error(err);
 			res.status(500).send("Error requesting user id.");
 		});
 });
@@ -29,18 +31,25 @@ usersRouter.post("/new", (req, res) => {
 		.then(([result]) => {
 			res.status(200).send({ ...req.body, id: result.insertId });
 		})
-		.catch(() => {
+		.catch((err) => {
+			console.error(err);
 			res.status(500).send("Error creating new user.");
 		});
 });
 
 usersRouter.put("/:id", (req, res) => {
+	console.log(req.body);
 	users
-		.updateUser(req.body, req.params.id)
+		.updateUser(req.body, parseInt(req.params.id, 10))
 		.then(([result]) => {
-			res.status(201).send(`User ${req.body} successfully updated`);
+			if (result.affectedRows === 0) {
+				res.sendStatus(404);
+			} else {
+				res.status(201).send(`User ${req.body} successfully updated`);
+			}
 		})
-		.catch(() => {
+		.catch((err) => {
+			console.error(err);
 			res.status(500).send("Error updating user.");
 		});
 });
@@ -51,7 +60,8 @@ usersRouter.delete("/:id", (req, res) => {
 		.then(([result]) => {
 			res.status(200).send(`User ${req.body} successfully deleted`);
 		})
-		.catch(() => {
+		.catch((err) => {
+			console.error(err);
 			res.status(500).send("Error deleting user.");
 		});
 });

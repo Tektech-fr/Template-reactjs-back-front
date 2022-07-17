@@ -1,7 +1,21 @@
 import { useState } from "react";
+import axios from "axios";
 
-const AddUserForm = (props) => {
-	const initialFormState = { id: null, name: "", username: "" };
+const AddUserForm = () => {
+	const addUser = (user) => {
+		axios.post(`http://localhost:5005/users/new`, user).catch((err) => {
+			console.warn(err.res.data);
+		});
+	};
+
+	const initialFormState = {
+		firstname: "",
+		lastname: "",
+		password: "",
+		email: "",
+		phone: "",
+	};
+
 	const [user, setUser] = useState(initialFormState);
 
 	const handleInputChange = (event) => {
@@ -10,30 +24,58 @@ const AddUserForm = (props) => {
 		setUser({ ...user, [name]: value });
 	};
 
+	if (!user) return "";
+
 	return (
 		<form
 			onSubmit={(event) => {
 				event.preventDefault();
-				if (!user.name || !user.username) return;
+				if (!user) return;
 
-				props.addUser(user);
+				addUser(user);
 				setUser(initialFormState);
 			}}
 		>
-			<label>Name</label>
+			<label>Firstname</label>
 			<input
 				type="text"
-				name="name"
-				value={user.name}
+				name="firstname"
+				value={user.firstname}
 				onChange={handleInputChange}
 			/>
-			<label>Username</label>
+
+			<label>Lastname</label>
 			<input
 				type="text"
-				name="username"
-				value={user.username}
+				name="lastname"
+				value={user.lastname}
 				onChange={handleInputChange}
 			/>
+
+			<label>Password</label>
+			<input
+				type="text"
+				name="password"
+				value={user.password}
+				onChange={handleInputChange}
+			/>
+
+			<label>Email</label>
+			<input
+				type="text"
+				name="email"
+				value={user.email}
+				onChange={handleInputChange}
+			/>
+
+			<label>Phone</label>
+			<input
+				type="text"
+				name="phone"
+				value={user.phone}
+				onChange={handleInputChange}
+			/>
+
 			<button>Add new user</button>
 		</form>
 	);
