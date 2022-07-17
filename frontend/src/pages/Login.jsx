@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
 	return (
-		<main>
+		<main id="MainLogin">
 			<h1>Login</h1>
 			<p>Login page</p>
 			<Link to="/home">

@@ -1,10 +1,18 @@
-form {
-	width: 80%;
-	margin: auto;
-	display: flex;
-	flex-direction: column;
+main#MainHome {
+	h1 {
+		text-align: center;
+	}
 
-	label {
-		margin: 10px 0;
+	.container {
+		display: flex;
+		justify-content: space-between;
+
+		section:first-of-type {
+			width: 30%;
+		}
+
+		section:last-of-type {
+			width: 66%;
+		}
 	}
 }

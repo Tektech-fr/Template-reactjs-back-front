@@ -1,0 +1,60 @@
+table#UserTable {
+	border-spacing: 0;
+	width: 100%;
+
+	th {
+		border-bottom: 2px solid rgba($bg-color-second, 0.2);
+	}
+
+	td {
+		border-bottom: 1px solid rgba($bg-color-second, 0.1);
+	}
+
+	th,
+	td {
+		text-align: left;
+		padding: 0.5rem;
+	}
+
+	tbody {
+		tr:nth-child(odd) {
+			background-color: rgba($bg-color-second, 0.1);
+		}
+
+		td:last-child {
+			display: flex;
+			justify-content: space-around;
+		}
+	}
+
+	button {
+		width: 45%;
+		padding: 10px 0;
+		border-radius: 4px;
+		cursor: pointer;
+		border: 1px solid;
+		font-weight: 600;
+		font-size: 1rem;
+		color: $text-color-main;
+	}
+
+	.edit {
+		background-color: #37afb7;
+		border: #37afb7;
+	}
+
+	.edit:hover {
+		background-color: rgba(#37afb7, 0.6);
+		border: rgba(#37afb7, 0.8);
+	}
+
+	.delete {
+		background-color: #b73737;
+		border: #b73737;
+	}
+
+	.delete:hover {
+		background-color: rgba(#b73737, 0.6);
+		border: rgba(#b73737, 0.8);
+	}
+}

@@ -20,3 +20,7 @@ backend folder:
 ## From an idea by
 
 - [Kévin Peset](https://github.com/kpeset)
+
+## With inspiration from
+
+- [Tania Rascia](https://github.com/taniarascia)
