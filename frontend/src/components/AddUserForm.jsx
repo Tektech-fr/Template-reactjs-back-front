@@ -3,17 +3,9 @@ import axios from "axios";
 
 const AddUserForm = () => {
 	const addUser = (user) => {
-		axios
-			.post(`http://localhost:5005/users/new`, {
-				firstname: user.firstname,
-				lastname: user.lastname,
-				password: user.password,
-				email: user.email,
-				phone: user.phone,
-			})
-			.catch((err) => {
-				console.warn(err.res.data);
-			});
+		axios.post(`http://localhost:5005/users/new`, user).catch((err) => {
+			console.warn(err.res.data);
+		});
 	};
 
 	const initialFormState = {
@@ -51,8 +43,6 @@ const AddUserForm = () => {
 				setUser(initialFormState);
 			}}
 		>
-			{console.log(user)}
-
 			<label>Firstname</label>
 			<input
 				type="text"
