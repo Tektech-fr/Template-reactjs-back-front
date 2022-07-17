@@ -2,9 +2,12 @@ import axios from "axios";
 
 const UserTable = ({ users, editRow }) => {
 	const deleteUser = (id) => {
-		axios.delete(`http://localhost:5005/users/${id}`).catch((err) => {
-			console.warn(err.res.data);
-		});
+		axios
+			.delete(`http://localhost:5005/users/${id}`)
+			.then((res) => console.log(res.data))
+			.catch((err) => {
+				console.warn(err.res.data);
+			});
 	};
 
 	return (

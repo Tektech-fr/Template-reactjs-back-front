@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const EditUserForm = (props) => {
-	const [user, setUser] = useState(props.currentUser);
+const EditUserForm = ({ setEditing, currentUser, updateUser }) => {
+	const [user, setUser] = useState(currentUser);
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
@@ -10,38 +10,59 @@ const EditUserForm = (props) => {
 	};
 
 	useEffect(() => {
-		setUser(props.currentUser);
-	}, [props]);
+		setUser(currentUser);
+	}, [currentUser]);
 
 	return (
 		<form
 			onSubmit={(event) => {
 				event.preventDefault();
 
-				props.updateUser(user.id, user);
+				updateUser(user.id, user);
 			}}
 		>
-			<label>Name</label>
+			<label>Firstname</label>
 			<input
 				type="text"
-				name="name"
-				value={user.name}
+				name="firstname"
+				value={user.firstname}
 				onChange={handleInputChange}
 			/>
-			<label>Username</label>
+
+			<label>Lastname</label>
 			<input
 				type="text"
-				name="username"
-				value={user.username}
+				name="lastname"
+				value={user.lastname}
 				onChange={handleInputChange}
 			/>
+
+			<label>Password</label>
+			<input
+				type="text"
+				name="password"
+				value={user.password}
+				onChange={handleInputChange}
+			/>
+
+			<label>Email</label>
+			<input
+				type="text"
+				name="email"
+				value={user.email}
+				onChange={handleInputChange}
+			/>
+
+			<label>Phone</label>
+			<input
+				type="text"
+				name="phone"
+				value={user.phone}
+				onChange={handleInputChange}
+			/>
+
 			<button>Update user</button>
-			<button
-				onClick={() => props.setEditing(false)}
-				className="button muted-button"
-			>
-				Cancel
-			</button>
+			<button onClick={() => setEditing(false)}>Cancel</button>
 		</form>
 	);
 };

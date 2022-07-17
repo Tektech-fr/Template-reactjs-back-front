@@ -30,14 +30,7 @@ const AddUserForm = () => {
 		<form
 			onSubmit={(event) => {
 				event.preventDefault();
-				if (
-					!user.firstname ||
-					!user.lastname ||
-					!user.password ||
-					!user.email ||
-					!user.phone
-				)
-					return;
+				if (!user) return;
 
 				addUser(user);
 				setUser(initialFormState);

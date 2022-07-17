@@ -38,10 +38,15 @@ usersRouter.post("/new", (req, res) => {
 });
 
 usersRouter.put("/:id", (req, res) => {
+	console.log(req.body);
 	users
-		.updateUser(req.body, req.params.id)
+		.updateUser(req.body, parseInt(req.params.id, 10))
 		.then(([result]) => {
-			res.status(201).send(`User ${req.body} successfully updated`);
+			if (result.affectedRows === 0) {
+				res.sendStatus(404);
+			} else {
+				res.status(201).send(`User ${req.body} successfully updated`);
+			}
 		})
 		.catch((err) => {
 			console.error(err);

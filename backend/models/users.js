@@ -23,10 +23,7 @@ const createUser = (user) => {
 };
 
 const updateUser = (user, id) => {
-	return db.query(
-		"UPDATE users SET firstname = ? lastname = ? password = ? email = ? phone = ? WHERE id = ?",
-		[user.firstname, user.lastname, user.password, user.email, user.phone, id]
-	);
+	return db.query(`UPDATE users SET ? WHERE id = ?`, [user, id]);
 };
 
 const deleteUser = (id) => {

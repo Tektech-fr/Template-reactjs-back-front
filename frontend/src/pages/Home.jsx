@@ -5,11 +5,9 @@ import AddUserForm from "@comp/AddUserForm";
 import EditUserForm from "@comp/EditUserForm";
 
 const App = () => {
-	const initialFormState = { id: null, name: "", username: "" };
-
-	const [users, setUsers] = useState();
+	const [users, setUsers] = useState([]);
 	const [editing, setEditing] = useState(false);
-	const [currentUser, setCurrentUser] = useState(initialFormState);
+	const [currentUser, setCurrentUser] = useState();
 
 	useEffect(() => {
 		axios
@@ -23,16 +21,26 @@ const App = () => {
 	const editRow = (user) => {
 		setEditing(true);
 
-		setCurrentUser({ id: user.id, name: user.name, username: user.username });
+		setCurrentUser({
+			id: user.id,
+			firstname: user.firstname,
+			lastname: user.lastname,
+			password: user.password,
+			email: user.email,
+			phone: user.phone,
+		});
 	};
 
 	const updateUser = (id, updatedUser) => {
 		setEditing(false);
 
-		setUsers(users.map((user) => (user.id === id ? updatedUser : user)));
+		axios
+			.put(`http://localhost:5005/users/${id}`, updatedUser)
+			.then(() => console.log("all ok"))
+			.catch((err) => {
+				console.warn(err.res.data);
+			});
 	};
-
-	if (!users) return "";
 
 	return (
 		<main id="MainHome">
