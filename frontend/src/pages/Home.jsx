@@ -44,7 +44,7 @@ const App = () => {
 
 	return (
 		<main id="MainHome">
-			<h1>CRUD App with Hooks</h1>
+			<h1>CRUD APP</h1>
 			<div className="container">
 				<section>
 					{editing ? (

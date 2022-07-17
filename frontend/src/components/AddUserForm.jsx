@@ -28,6 +28,7 @@ const AddUserForm = () => {
 
 	return (
 		<form
+			id="AddUserForm"
 			onSubmit={(event) => {
 				event.preventDefault();
 				if (!user) return;

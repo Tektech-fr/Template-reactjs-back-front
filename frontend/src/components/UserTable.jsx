@@ -11,14 +11,14 @@ const UserTable = ({ users, editRow }) => {
 	};
 
 	return (
-		<table>
+		<table id="UserTable">
 			<thead>
 				<tr>
-					<th>Firstname</th>
-					<th>Lastname</th>
-					<th>Email</th>
-					<th>Phone</th>
-					<th>Actions</th>
+					<th style={{ width: "15%" }}>Firstname</th>
+					<th style={{ width: "15%" }}>Lastname</th>
+					<th style={{ width: "25%" }}>Email</th>
+					<th style={{ width: "15%" }}>Phone</th>
+					<th style={{ width: "30%" }}>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,13 +31,16 @@ const UserTable = ({ users, editRow }) => {
 							<td>{user.phone}</td>
 							<td>
 								<button
+									className="edit"
 									onClick={() => {
 										editRow(user);
 									}}
 								>
 									Edit
 								</button>
-								<button onClick={() => deleteUser(user.id)}>Delete</button>
+								<button className="delete" onClick={() => deleteUser(user.id)}>
+									Delete
+								</button>
 							</td>
 						</tr>
 					))

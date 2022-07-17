@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&family=Roboto&display=swap");
+
+body {
+	margin: 0;
+	box-sizing: border-box;
+	background-color: $bg-color-main;
+	font-family: "Open Sans";
+}
+
+#root {
+	min-height: 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+main {
+	width: 80%;
+	margin: auto;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+
+	:visited {
+		color: white;
+	}
+}
