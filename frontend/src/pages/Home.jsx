@@ -20,20 +20,6 @@ const App = () => {
 			});
 	}, []);
 
-	const addUser = (newUser) => {
-		// user.id = users.length + 1;
-		// setUsers([...users, user]);
-		axios.post(`http://localhost:5005/users/new`, { newUser }).catch((err) => {
-			console.warn(err.res.data);
-		});
-	};
-
-	const deleteUser = (id) => {
-		axios.delete(`http://localhost:5005/users/${id}`).catch((err) => {
-			console.warn(err.res.data);
-		});
-	};
-
 	const editRow = (user) => {
 		setEditing(true);
 
@@ -65,14 +51,14 @@ const App = () => {
 					) : (
 						<>
 							<h2>Add user</h2>
-							<AddUserForm addUser={addUser} />
+							<AddUserForm />
 						</>
 					)}
 				</section>
 
 				<section>
 					<h2>View users</h2>
-					<UserTable users={users} editRow={editRow} deleteUser={deleteUser} />
+					<UserTable users={users} editRow={editRow} />
 				</section>
 			</div>
 		</main>

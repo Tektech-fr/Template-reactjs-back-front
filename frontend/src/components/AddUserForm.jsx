@@ -1,6 +1,21 @@
 import { useState } from "react";
+import axios from "axios";
 
-const AddUserForm = ({ user, addUser }) => {
+const AddUserForm = () => {
+	const addUser = (user) => {
+		axios
+			.post(`http://localhost:5005/users/new`, {
+				firstname: user.firstname,
+				lastname: user.lastname,
+				password: user.password,
+				email: user.email,
+				phone: user.phone,
+			})
+			.catch((err) => {
+				console.warn(err.res.data);
+			});
+	};
+
 	const initialFormState = {
 		firstname: "",
 		lastname: "",
@@ -8,41 +23,41 @@ const AddUserForm = ({ user, addUser }) => {
 		email: "",
 		phone: "",
 	};
-	console.log(user);
 
-	const [newUser, setNewUser] = useState(initialFormState);
-	// console.log(newUser);
+	const [user, setUser] = useState(initialFormState);
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 
-		setNewUser({ ...newUser, [name]: value });
+		setUser({ ...user, [name]: value });
 	};
 
-	if (!newUser) return "";
+	if (!user) return "";
 
 	return (
 		<form
 			onSubmit={(event) => {
 				event.preventDefault();
 				if (
-					!newUser.firstname ||
-					!newUser.lastname ||
-					!newUser.password ||
-					!newUser.email ||
-					!newUser.phone
+					!user.firstname ||
+					!user.lastname ||
+					!user.password ||
+					!user.email ||
+					!user.phone
 				)
 					return;
 
-				// addUser(newUser);
-				// setUser(initialFormState);
+				addUser(user);
+				setUser(initialFormState);
 			}}
 		>
+			{console.log(user)}
+
 			<label>Firstname</label>
 			<input
 				type="text"
 				name="firstname"
-				value={newUser.firstname}
+				value={user.firstname}
 				onChange={handleInputChange}
 			/>
 
@@ -50,7 +65,7 @@ const AddUserForm = ({ user, addUser }) => {
 			<input
 				type="text"
 				name="lastname"
-				value={newUser.lastname}
+				value={user.lastname}
 				onChange={handleInputChange}
 			/>
 
@@ -58,7 +73,7 @@ const AddUserForm = ({ user, addUser }) => {
 			<input
 				type="text"
 				name="password"
-				value={newUser.password}
+				value={user.password}
 				onChange={handleInputChange}
 			/>
 
@@ -66,7 +81,7 @@ const AddUserForm = ({ user, addUser }) => {
 			<input
 				type="text"
 				name="email"
-				value={newUser.email}
+				value={user.email}
 				onChange={handleInputChange}
 			/>
 
@@ -74,7 +89,7 @@ const AddUserForm = ({ user, addUser }) => {
 			<input
 				type="text"
 				name="phone"
-				value={newUser.phone}
+				value={user.phone}
 				onChange={handleInputChange}
 			/>
 
