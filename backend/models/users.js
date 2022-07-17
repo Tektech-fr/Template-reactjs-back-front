@@ -3,7 +3,7 @@ const db = connection.promise();
 
 const findAll = () => {
 	return db
-		.query("SELECT firstname, lastname, email, phone FROM users ")
+		.query("SELECT id, firstname, lastname, email, phone FROM users ")
 		.then(([res]) => res);
 };
 

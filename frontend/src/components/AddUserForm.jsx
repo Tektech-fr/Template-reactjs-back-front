@@ -1,39 +1,83 @@
 import { useState } from "react";
 
-const AddUserForm = (props) => {
-	const initialFormState = { id: null, name: "", username: "" };
-	const [user, setUser] = useState(initialFormState);
+const AddUserForm = ({ user, addUser }) => {
+	const initialFormState = {
+		firstname: "",
+		lastname: "",
+		password: "",
+		email: "",
+		phone: "",
+	};
+	console.log(user);
+
+	const [newUser, setNewUser] = useState(initialFormState);
+	// console.log(newUser);
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 
-		setUser({ ...user, [name]: value });
+		setNewUser({ ...newUser, [name]: value });
 	};
+
+	if (!newUser) return "";
 
 	return (
 		<form
 			onSubmit={(event) => {
 				event.preventDefault();
-				if (!user.name || !user.username) return;
+				if (
+					!newUser.firstname ||
+					!newUser.lastname ||
+					!newUser.password ||
+					!newUser.email ||
+					!newUser.phone
+				)
+					return;
 
-				props.addUser(user);
-				setUser(initialFormState);
+				// addUser(newUser);
+				// setUser(initialFormState);
 			}}
 		>
-			<label>Name</label>
+			<label>Firstname</label>
 			<input
 				type="text"
-				name="name"
-				value={user.name}
+				name="firstname"
+				value={newUser.firstname}
 				onChange={handleInputChange}
 			/>
-			<label>Username</label>
+
+			<label>Lastname</label>
 			<input
 				type="text"
-				name="username"
-				value={user.username}
+				name="lastname"
+				value={newUser.lastname}
 				onChange={handleInputChange}
 			/>
+
+			<label>Password</label>
+			<input
+				type="text"
+				name="password"
+				value={newUser.password}
+				onChange={handleInputChange}
+			/>
+
+			<label>Email</label>
+			<input
+				type="text"
+				name="email"
+				value={newUser.email}
+				onChange={handleInputChange}
+			/>
+
+			<label>Phone</label>
+			<input
+				type="text"
+				name="phone"
+				value={newUser.phone}
+				onChange={handleInputChange}
+			/>
+
 			<button>Add new user</button>
 		</form>
 	);

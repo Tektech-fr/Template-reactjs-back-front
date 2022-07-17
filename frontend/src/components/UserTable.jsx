@@ -1,27 +1,31 @@
-const UserTable = (props) => (
+const UserTable = ({ users, editRow, deleteUser }) => (
 	<table>
 		<thead>
 			<tr>
-				<th>Name</th>
-				<th>Username</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Email</th>
+				<th>Phone</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			{props.users.length > 0 ? (
-				props.users.map((user) => (
+			{users.length > 0 ? (
+				users.map((user) => (
 					<tr key={user.id}>
-						<td>{user.name}</td>
-						<td>{user.username}</td>
+						<td>{user.firstname}</td>
+						<td>{user.lastname}</td>
+						<td>{user.email}</td>
+						<td>{user.phone}</td>
 						<td>
 							<button
 								onClick={() => {
-									props.editRow(user);
+									editRow(user);
 								}}
 							>
 								Edit
 							</button>
-							<button onClick={() => props.deleteUser(user.id)}>Delete</button>
+							<button onClick={() => deleteUser(user.id)}>Delete</button>
 						</td>
 					</tr>
 				))
