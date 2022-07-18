@@ -1,8 +1,8 @@
 require("dotenv").config();
-
 const express = require("express");
+const cors = require("cors");
+const { setup } = require("./routes");
 const connection = require("./db-config");
-const setup = require("./routes");
 
 const app = express();
 
@@ -15,6 +15,8 @@ connection.connect((err) => {
 			`connected as id ${connection.threadId}. Keep it secret, we don't know where THEY are.`
 		);
 });
+
+app.use(cors({ origin: process.env.FRONTEND_URL ?? "http://localhost:3000" }));
 
 app.use(express.json());
 

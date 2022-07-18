@@ -1,0 +1,33 @@
+form#AddUserForm {
+	display: flex;
+	flex-wrap: wrap;
+
+	label {
+		width: 30%;
+		margin: 14px 0;
+	}
+
+	input {
+		width: 60%;
+		margin: 10px 0;
+		padding-left: 4px;
+	}
+
+	button {
+		border: 1px solid $bg-color-button;
+		background: $bg-color-button;
+		color: $text-color-main;
+		border-radius: 4px;
+		font-weight: 600;
+		font-size: 1rem;
+		padding: 0.75rem 1.25rem;
+		cursor: pointer;
+	}
+
+	button:hover {
+		border: 1px solid #0250bc;
+		background: #0250bc;
+		color: #ffffff;
+		text-decoration: none;
+	}
+}

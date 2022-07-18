@@ -1,0 +1,18 @@
+main#MainHome {
+	h1 {
+		text-align: center;
+	}
+
+	.container {
+		display: flex;
+		justify-content: space-between;
+
+		section:first-of-type {
+			width: 30%;
+		}
+
+		section:last-of-type {
+			width: 66%;
+		}
+	}
+}
