@@ -2,15 +2,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-	const [username, setUsername] = useState();
-	const [password, setPassword] = useState();
+	const [formInputs, setFormInputs] = useState({
+		username: "",
+		password: "",
+	});
 
-	const handleNameChange = (e) => {
-		setUsername(e.target.value);
-	};
-
-	const handlePassChange = (e) => {
-		setPassword(e.target.value);
+	const handleChange = (e) => {
+		setFormInputs({
+			...formInputs,
+			[e.target.name]: e.target.value,
+		});
 	};
 
 	return (
@@ -20,17 +21,27 @@ const Login = () => {
 			<form>
 				<label>
 					Firstname :{" "}
-					<input type="text" value={username} onChange={handleNameChange} />
+					<input
+						type="text"
+						name="username"
+						value={formInputs.username}
+						onChange={handleChange}
+					/>
 				</label>
 
 				<label>
 					Password :{" "}
-					<input type="password" value={password} onChange={handlePassChange} />
+					<input
+						type="password"
+						name="password"
+						value={formInputs.password}
+						onChange={handleChange}
+					/>
 				</label>
 			</form>
 
-			<h2>{username}</h2>
-			<h2>{password}</h2>
+			<h2>{formInputs.username}</h2>
+			<h2>{formInputs.password}</h2>
 
 			<Link to="/admin">
 				<button>CLICK ME</button>
