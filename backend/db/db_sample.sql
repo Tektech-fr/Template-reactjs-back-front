@@ -1,4 +1,30 @@
 DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `roles`;
+
+-- ------------------------------------------------------------------------- --
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
+--
+-- Content for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+INSERT INTO `roles` (`name`) VALUES
+("registered"),
+("admin");
+UNLOCK TABLES;
+
+-- ------------------------------------------------------------------------- --
+--
+-- Table structure for table `users`
+--
 
 CREATE TABLE `users` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -6,8 +32,15 @@ CREATE TABLE `users` (
   `lastname` VARCHAR(100) NULL,
   `password` VARCHAR(50) NOT NULL,
   `email` VARCHAR(255) NULL,
-  `phone` VARCHAR(20) NULL
+  `phone` VARCHAR(20) NULL,
+  `role_id` INT NULL,
+
+  FOREIGN KEY (role_id) REFERENCES roles(id)
 ) ENGINE=InnoDB;
+
+--
+-- Content for table `users`
+--
 
 LOCK TABLES `users` WRITE;
 INSERT INTO `users` (`firstname`, `lastname`,`password`, `email`, `phone`) VALUES

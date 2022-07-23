@@ -18,6 +18,10 @@ const App = () => {
 			});
 	}, []);
 
+	const addUserToState = (newUser) => {
+		setUsers([...users, newUser]);
+	};
+
 	const editRow = (user) => {
 		setEditing(true);
 
@@ -59,7 +63,7 @@ const App = () => {
 					) : (
 						<>
 							<h2>Add user</h2>
-							<AddUserForm />
+							<AddUserForm addUserToState={addUserToState} />
 						</>
 					)}
 				</section>
