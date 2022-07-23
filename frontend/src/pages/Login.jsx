@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
 	const [formInputs, setFormInputs] = useState({
@@ -7,11 +8,25 @@ const Login = () => {
 		password: "",
 	});
 
+	const navigate = useNavigate();
+
 	const handleChange = (e) => {
 		setFormInputs({
 			...formInputs,
 			[e.target.name]: e.target.value,
 		});
+	};
+
+	const LoginAttempt = () => {
+		if (!formInputs) return "please input credentials.";
+		axios
+			.post("http://localhost:5005/login", formInputs)
+			.then((res) => {
+				navigate("/admin");
+			})
+			.catch((err) => {
+				console.error(err);
+			});
 	};
 
 	return (
@@ -43,9 +58,7 @@ const Login = () => {
 			<h2>{formInputs.username}</h2>
 			<h2>{formInputs.password}</h2>
 
-			<Link to="/admin">
-				<button>CLICK ME</button>
-			</Link>
+			<button onClick={() => LoginAttempt()}>LOGIN</button>
 		</main>
 	);
 };
