@@ -18,9 +18,12 @@ const Login = () => {
 	};
 
 	const LoginAttempt = () => {
-		if (!formInputs) return "please input credentials.";
+		if (!formInputs) return "please provide credentials.";
 		axios
-			.post("http://localhost:5005/login", formInputs)
+			.post("http://localhost:5005/auth", {
+				username: formInputs.username,
+				password: formInputs.password,
+			})
 			.then((res) => {
 				navigate("/admin");
 			})
@@ -54,9 +57,6 @@ const Login = () => {
 					/>
 				</label>
 			</form>
-
-			<h2>{formInputs.username}</h2>
-			<h2>{formInputs.password}</h2>
 
 			<button onClick={() => LoginAttempt()}>LOGIN</button>
 		</main>
