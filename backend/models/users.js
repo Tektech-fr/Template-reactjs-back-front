@@ -17,7 +17,16 @@ const findOne = (id) => {
 
 const findOneByName = (username) => {
 	return db
-		.query("SELECT * FROM users WHERE firstname = ?", [username])
+		.query(
+			`SELECT
+		users.id,
+		roles.name role
+		FROM users
+		INNER JOIN roles
+		ON roles.id = users.role_id
+		WHERE firstname = ?`,
+			[username]
+		)
 		.then(([res]) => res[0]);
 };
 

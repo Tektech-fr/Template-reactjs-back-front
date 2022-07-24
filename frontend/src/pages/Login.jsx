@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserExport from "../contexts/UserContext";
@@ -9,6 +9,8 @@ const Login = () => {
 	const [msg, setMsg] = useState("");
 
 	const navigate = useNavigate();
+
+	const { user, setUser } = useContext(UserExport.UserContext);
 
 	const handleUsername = (e) => {
 		setUsername(e.target.value);
@@ -28,9 +30,10 @@ const Login = () => {
 				password,
 			})
 			.then((res) => {
-				console.log(res.data);
-				setUsername(res.data);
-				if (user.role === "admin") {
+				console.log(res.data.role);
+				setUser(res.data);
+
+				if (res.data.role === "admin") {
 					navigate("/admin");
 				} else {
 					navigate("/");
@@ -66,6 +69,8 @@ const Login = () => {
 					/>
 				</label>
 			</form>
+
+			{msg && <p>{msg}</p>}
 
 			<button onClick={() => LoginAttempt()}>LOGIN</button>
 		</main>
