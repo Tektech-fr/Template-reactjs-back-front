@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 
-const AddUserForm = () => {
+const AddUserForm = ({ addUserToState }) => {
 	const addUser = (user) => {
-		axios.post(`http://localhost:5005/users/new`, user).catch((err) => {
-			console.warn(err.res.data);
-		});
+		axios
+			.post(`http://localhost:5005/users/new`, user)
+			.then((res) => addUserToState(res.data))
+			.catch((err) => {
+				console.warn(err.res.data);
+			});
 	};
 
 	const initialFormState = {

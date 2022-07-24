@@ -6,10 +6,14 @@
 		"migrate": "node db/migrate.js"
 	},
 	"dependencies": {
+		"argon2": "^0.28.7",
+		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.1",
 		"express": "^4.18.1",
 		"fs": "^0.0.1-security",
+		"joi": "^17.6.0",
+		"jsonwebtoken": "^8.5.1",
 		"mysql2": "^2.3.3",
 		"nodemon": "^2.0.18",
 		"template": "file:.."
