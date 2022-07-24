@@ -1,0 +1,12 @@
+#NavBarComponent {
+	width: 80%;
+	height: 10vh;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	a {
+		color: black;
+	}
+}

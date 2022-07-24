@@ -7,4 +7,18 @@ main#MainLogin {
 	h1 {
 		text-align: center;
 	}
+
+	form {
+		width: 80%;
+		min-height: 10vh;
+		margin: 10vh auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	input {
+		padding: 10px;
+	}
 }

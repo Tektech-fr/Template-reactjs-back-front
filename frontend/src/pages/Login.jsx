@@ -1,13 +1,78 @@
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import UserExport from "../contexts/UserContext";
 
 const Login = () => {
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [msg, setMsg] = useState("");
+
+	const navigate = useNavigate();
+
+	const { user, setUser } = useContext(UserExport.UserContext);
+
+	const handleUsername = (e) => {
+		setUsername(e.target.value);
+	};
+	const handlePassword = (e) => {
+		setPassword(e.target.value);
+	};
+
+	const LoginAttempt = () => {
+		if (!username || !password) {
+			setMsg("Please provide credentials first.");
+			return;
+		}
+		axios
+			.post("http://localhost:5005/users/auth", {
+				username,
+				password,
+			})
+			.then((res) => {
+				console.log(res.data.role);
+				setUser(res.data);
+
+				if (res.data.role === "admin") {
+					navigate("/admin");
+				} else {
+					navigate("/");
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	};
+
 	return (
 		<main id="MainLogin">
 			<h1>Login</h1>
-			<p>Login page</p>
-			<Link to="/home">
-				<button>CLICK ME</button>
-			</Link>
+
+			<form>
+				<label>
+					Firstname :{" "}
+					<input
+						type="text"
+						name="username"
+						value={username}
+						onChange={handleUsername}
+					/>
+				</label>
+
+				<label>
+					Password :{" "}
+					<input
+						type="password"
+						name="password"
+						value={password}
+						onChange={handlePassword}
+					/>
+				</label>
+			</form>
+
+			{msg && <p>{msg}</p>}
+
+			<button onClick={() => LoginAttempt()}>LOGIN</button>
 		</main>
 	);
 };

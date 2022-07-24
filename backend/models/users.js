@@ -15,6 +15,21 @@ const findOne = (id) => {
 		.then(([res]) => res[0]);
 };
 
+const findOneByName = (username) => {
+	return db
+		.query(
+			`SELECT
+		users.id,
+		roles.name role
+		FROM users
+		INNER JOIN roles
+		ON roles.id = users.role_id
+		WHERE firstname = ?`,
+			[username]
+		)
+		.then(([res]) => res[0]);
+};
+
 const createUser = (user) => {
 	return db.query(
 		"INSERT INTO users (firstname, lastname, password, email, phone) VALUES (?, ?, ?, ?, ?)",
@@ -30,4 +45,11 @@ const deleteUser = (id) => {
 	return db.query("DELETE FROM users WHERE id = ?", [id]);
 };
 
-module.exports = { findAll, findOne, createUser, updateUser, deleteUser };
+module.exports = {
+	findAll,
+	findOne,
+	findOneByName,
+	createUser,
+	updateUser,
+	deleteUser,
+};
