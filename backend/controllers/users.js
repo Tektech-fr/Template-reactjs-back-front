@@ -37,6 +37,12 @@ usersRouter.post("/new", (req, res) => {
 		});
 });
 
+usersRouter.post("/auth", (req, res) => {
+	users.findOneByName(req.body.username).then((result) => {
+		return res.status(200).json(result);
+	});
+});
+
 usersRouter.put("/:id", (req, res) => {
 	console.log(req.body);
 	users

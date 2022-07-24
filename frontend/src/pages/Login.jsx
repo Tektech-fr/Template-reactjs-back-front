@@ -1,31 +1,40 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import UserExport from "../contexts/UserContext";
 
 const Login = () => {
-	const [formInputs, setFormInputs] = useState({
-		username: "",
-		password: "",
-	});
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [msg, setMsg] = useState("");
 
 	const navigate = useNavigate();
 
-	const handleChange = (e) => {
-		setFormInputs({
-			...formInputs,
-			[e.target.name]: e.target.value,
-		});
+	const handleUsername = (e) => {
+		setUsername(e.target.value);
+	};
+	const handlePassword = (e) => {
+		setPassword(e.target.value);
 	};
 
 	const LoginAttempt = () => {
-		if (!formInputs) return "please provide credentials.";
+		if (!username || !password) {
+			setMsg("Please provide credentials first.");
+			return;
+		}
 		axios
-			.post("http://localhost:5005/auth", {
-				username: formInputs.username,
-				password: formInputs.password,
+			.post("http://localhost:5005/users/auth", {
+				username,
+				password,
 			})
 			.then((res) => {
-				navigate("/admin");
+				console.log(res.data);
+				setUsername(res.data);
+				if (user.role === "admin") {
+					navigate("/admin");
+				} else {
+					navigate("/");
+				}
 			})
 			.catch((err) => {
 				console.error(err);
@@ -42,8 +51,8 @@ const Login = () => {
 					<input
 						type="text"
 						name="username"
-						value={formInputs.username}
-						onChange={handleChange}
+						value={username}
+						onChange={handleUsername}
 					/>
 				</label>
 
@@ -52,8 +61,8 @@ const Login = () => {
 					<input
 						type="password"
 						name="password"
-						value={formInputs.password}
-						onChange={handleChange}
+						value={password}
+						onChange={handlePassword}
 					/>
 				</label>
 			</form>
